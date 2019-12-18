@@ -324,6 +324,8 @@
 		    height: 3px;
 		    background: #f7f7f7;
 		  }
+		  
+		  
 				
   </style>
 </head>
@@ -367,7 +369,7 @@
              <button id="previous"><i class="fa fa-undo" style="color: yellowgreen;"></i></button>
              <button id="nope"><i class="fa fa-remove"></i></button>
              <button id="love"><i class="fa fa-heart"></i></button>
-             <button id="superLike"><i class="fa fa-star" style="color: skyblue;"></i></button>
+             <button id="superLike" onclick="newWindow('$(loginUser.u_Mid)', '$(mlist.u_Mid)');"><i class="fa fa-star" style="color: skyblue;"></i></button>
            </div>
       </div>
    </div>
@@ -421,7 +423,7 @@
 					} 
 			</script> 
 </div>
- 
+	
 <script>
    // ajax의 작업을 먼저 완료하고, 그다음에 다큐먼트들을 긁어온다음, 카드들을 생성해야되.
   	 /*

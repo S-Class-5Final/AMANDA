@@ -130,6 +130,75 @@ body {
 	margin-left: 55%;
 	margin-bottom: 10%;
 }
+/* 채팅 css */
+.chatListView{
+    width: auto;
+    height: 80%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    border: 1px solid black;
+    z-index: 1000;
+    text-align: center;
+    border-radius: 0.5em;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-left: 1em;
+}
+.chatListView::-webkit-scrollbar {
+	display: none;
+}
+.chatRoomImg{
+	margin:1em;
+}
+.chatUserImg{
+	width: 4em;
+    height: 4em;
+    border-radius: 50% 50% 50% 50%;
+    border: 1px solid lightgray;
+}
+.chatUserName{
+	margin: 0;
+    font-size: smaller;
+    font-weight: bold;
+}
+.signalChat{
+	position: absolute;
+    right: 1em;
+    top: 0.7em;
+    background-color: red;
+    border-radius: 50% 50% 50% 50%;
+    width: 1.5em;
+    height: 1.5em;
+    font-size: small;
+    color: white;
+}
+.scViewBtn{
+	position: fixed;
+    right: 7em;
+    border-radius: 10%;
+    background-color: white;
+    width: 2em;
+    height: 4em;
+    top: 37%;
+    z-index: 100;
+    border: 1px solid lightgray;
+}
+.crShowView{
+	position: fixed;
+    right: 0;
+    width: 7em;
+    height: 70%;
+    z-index: 1000;
+    margin-top: 5%;
+}
+.crShowView.hidecView{
+	-webkit-transform:translateX(6em);
+	transition-duration: 0.5s;
+}
+.crShowView.showView{
+	-webkit-transform:translateX(0);
+	transition-duration: 0.5s;
+}
 </style>
 </head>
 <body>
@@ -268,7 +337,82 @@ body {
 			});
 		});
 	</script> -->
-	
+	<!-- 채팅 목록 -->
+	<div id="crShowViewDiv" class="crShowView hidecView">
+		<input type="button" id="scViewBtn" class="scViewBtn" value="<">
+		<div id="chatListView" class="chatListView">
+			
+		</div>
+		<form name="popForm" method="get">
+			<input type="hidden" name="user1" id="user1">
+			<input type="hidden" name="user2" id="user2">
+		</form>
+		
+	</div>
+<!-- 채팅목록 스크립트 -->
+<script type="text/javascript">
+		var chatView;
+		
+		window.addEventListener("beforeunload", function (event) {
+			chatView.close();
+		});
+
+		function newWindow(user1, user2){
+			$("#user1").val(user1);
+			console.log($("#user1").val());
+			$("#user2").val(user2);
+			console.log($("#user2").val());
+			var popForm = document.popForm;
+			if(chatView != null){
+				chatView.close();
+			}
+			chatView = window.open("", "Amanda", "left=100, top=100, location=0, resizable=0, menubar=0, status=0, titlebar=0, toolbar=0", true);
+			chatView.resizeTo("370", "600");
+			chatView.resizeBy("0", "0");
+			
+			popForm.action = "chChat.do";
+			popForm.method = "post";
+			popForm.target = "Amanda";
+			popForm.submit();
+			
+		}
+		
+		$("#scViewBtn").click(function(){
+			if($("#crShowViewDiv").hasClass("hidecView") == true){
+				$("#crShowViewDiv").removeClass("hidecView");
+				$("#crShowViewDiv").addClass("showView");
+				$("#scViewBtn").val(">");
+			}else{
+				$("#crShowViewDiv").addClass("hidecView");
+				$("#crShowViewDiv").removeClass("showView");
+				$("#scViewBtn").val("<");
+			}
+		});
+		// 채팅 목록 가져오기
+		function findChatRoom(){
+			$.ajax({
+				url:"chfindChat.do",
+				type:"post",
+				data:{userName : "홍길동"},
+				dataType:"json",
+				success:function(data){
+					var roomDiv = $("#chatListView");
+					console.log(data);
+					for(var i in data){
+						/* 수정 */
+						var addRoom = $("<div></div>").attr("onclick", "newWindow('4','"+data[i].uMid+"')").addClass("chatRoomImg").appendTo(roomDiv);
+						var addSignal = $("<p></p>").appendTo(addRoom);
+						if(data[i].conSum > 0){
+							addSignal.addClass("signalChat").text(data[i].conSum);
+						}
+						var chatImg = $("<img>").attr("src", "resources/img/"+data[i].renameFileName).addClass("chatUserImg").appendTo(addRoom);
+						var userName = $("<p></p>").text(data[i].userNick).addClass("chatUserName").appendTo(addRoom);
+						
+					}
+				}
+			});
+		}
+	</script>
 </body>
 
 </html>
