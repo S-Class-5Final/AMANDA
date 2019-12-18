@@ -299,7 +299,13 @@
 		<artifactId>google-cloud-storage</artifactId>
 		<version>1.75.0</version>
 	</dependency>
-
+	<!-- socket.io -->
+	<!-- https://mvnrepository.com/artifact/io.socket/socket.io-client -->
+	<dependency>
+		<groupId>io.socket</groupId>
+		<artifactId>socket.io-client</artifactId>
+		<version>1.0.0</version>
+	</dependency>
 	</dependencies>
     <build>
         <plugins>

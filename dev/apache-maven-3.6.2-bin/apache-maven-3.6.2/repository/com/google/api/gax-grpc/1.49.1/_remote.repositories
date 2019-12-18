@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 17 18:31:24 KST 2019
+gax-grpc-1.49.1-sources.jar>central=
+gax-grpc-1.49.1.jar>central=
+gax-grpc-1.49.1.pom>central=

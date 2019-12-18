@@ -21,6 +21,14 @@
 		<typeAlias type="com.fianl.AMANDA.Payment.model.vo.Payment" alias="Payment"/>
 		<typeAlias type="com.fianl.AMANDA.Message.model.vo.Message" alias="Message"/>
 		<typeAlias type="com.fianl.AMANDA.Like.model.vo.Like" alias="Like"/>
+		
+		<!-- Chatting -->
+		<typeAlias type="com.fianl.AMANDA.chat.model.vo.Chat" alias="Chat"/>
+		<typeAlias type="com.fianl.AMANDA.chat.model.vo.ChatRoom" alias="ChatRoom"/>
+		<typeAlias type="com.fianl.AMANDA.chat.model.vo.ChatInfo" alias="ChatInfo"/>
+		<typeAlias type="com.fianl.AMANDA.chat.model.vo.Report" alias="Report"/>
+		<typeAlias type="com.fianl.AMANDA.chat.model.vo.MemberImg" alias="MemberImg3"/>
+		<typeAlias type="com.fianl.AMANDA.chat.model.vo.ChatUser" alias="ChatUser"/>
 	</typeAliases>
 	
 	<!-- sql문들을 지닌 mapper.xml들을 등록 -->
@@ -33,6 +41,8 @@
 		<mapper resource="mappers/payment-mapper.xml"/>
 		<mapper resource="mappers/like-mapper.xml"/>
 		<mapper resource="mappers/message-mapper.xml"/>
+		<!-- Chatting -->
+		<mapper resource="mappers/chat-mapper.xml"/>
 	</mappers>
 	
 	<!-- 우선 member-mapper.xml만 만들고 로그인 부터 하자 -->

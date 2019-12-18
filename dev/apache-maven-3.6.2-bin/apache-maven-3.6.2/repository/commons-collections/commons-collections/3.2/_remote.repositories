@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Dec 17 18:33:38 KST 2019
+commons-collections-3.2.jar>central=
+commons-collections-3.2-sources.jar>central=
+commons-collections-3.2.pom>central=
